@@ -1,0 +1,167 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+# Lingting Shi Columbia University Azizi Lab 
+
+#Clean working enviorment
+rm(list=ls())
+gc()
+```
+
+```{r}
+#remotes::install_github('satijalab/seurat-wrappers')
+```
+
+
+
+```{r}
+#Install Package
+#install.packages('Seurat')
+#install.packages('dplyr')
+#install.packages('umap')
+#install.packages("reticulate")
+#Load library
+### Compare soft vs hard
+#devtools::install_github('satijalab/seurat-data')
+#install.packages("cowplot")
+#install.packages("SCORPIUS")
+#devtools::install_github('dviraran/SingleR')
+#library(SingleR)
+library(cowplot)
+library(dplyr)
+library(Seurat)
+library(umap)
+library(reticulate)
+library(SCORPIUS)
+library(ggplot2)
+library(MASS) 
+library(monocle3)
+library(Seurat)
+library(SeuratWrappers)
+library(patchwork)
+```
+```{r}
+#devtools::install_github("cellgeni/sceasy")
+```
+
+```{r}
+# Crying, covert anndata to seurat
+sceasy::convertFormat('/Users/lingtingshi/Documents/Azizi_lab/Decipher_monocle/gastric_data.h5', from="anndata", to="seurat",outFile='gastric_data.rds')
+```
+
+```{r}
+#Reading in seurat object
+gastric_data = readRDS('/Users/lingtingshi/Documents/Azizi_lab/Decipher_monocle/gastric_data.rds')
+```
+
+
+```{r}
+#Convert seurat object to cds
+gastric_data@active.assay = 'RNA'
+cds <- as.cell_data_set(gastric_data)
+```
+```{r}
+rowData(cds)$gene_name <- rownames(cds)
+rowData(cds)$gene_short_name <- rowData(cds)$gene_name
+rowData(cds)$id = rowData(cds)$gene_short_name
+cds <- estimate_size_factors(cds)
+```
+
+```{r}
+cds<-preprocess_cds(cds, num_dim = 10)
+```
+
+```{r}
+cds <-reduce_dimension(cds, umap.min_dist = 1, umap.n_neighbors = 10L)
+```
+
+```{r}
+cds <- cluster_cells(cds, resolution=1e-3)
+```
+
+
+```{r}
+plot_cells(cds, label_groups_by_cluster=FALSE,  color_cells_by = "class",group_label_size = 6, cell_size = 0.5)+
+theme(legend.position = "right",
+        legend.key.width = unit(0.2,"line"),
+        legend.key.height = unit(0.2,"line"))
+```
+
+
+```{r}
+gastric_genes <- c("MUC6", "ENO1", "TFF3", "EPCAM", "MUC5AC",  "MUC13",
+    "PGC", "ANXA2", "CEACAM5", "COL1A2", "TIMP1", "SPARC")
+plot_cells(cds,
+           genes=gastric_genes,
+           show_trajectory_graph=FALSE)
+```
+```{r}
+plot_cells(cds, color_cells_by = "partition",graph_label_size = 50, cell_size = 0.5)
+```
+
+
+```{r}
+cds <- learn_graph(cds)
+
+```
+```{r}
+plot_cells(cds,
+           color_cells_by = "class",
+           label_groups_by_cluster=TRUE,
+           label_leaves=FALSE,
+           label_branch_points=FALSE,
+           group_label_size= 4)+
+theme(legend.position = "right",
+        legend.key.width = unit(0.2,"line"),
+        legend.key.height = unit(0.2,"line"))
+ggsave("UMAP_traj_class.pdf", dpi = 600, width = 4.5, height = 3)
+```
+
+
+
+```{r}
+# a helper function to identify the root principal points:
+get_earliest_principal_node <- function(cds, class="Enteroendo"){
+  cell_ids <- which(colData(cds)[, "class"] == class)
+  
+  closest_vertex <-
+  cds@principal_graph_aux[["UMAP"]]$pr_graph_cell_proj_closest_vertex
+  closest_vertex <- as.matrix(closest_vertex[colnames(cds), ])
+  root_pr_nodes <-
+  igraph::V(principal_graph(cds)[["UMAP"]])$name[as.numeric(names
+  (which.max(table(closest_vertex[cell_ids,]))))]
+  
+  root_pr_nodes
+}
+cds <- order_cells(cds, root_pr_nodes=get_earliest_principal_node(cds))
+```
+
+
+```{r}
+
+plot_cells(cds,
+           color_cells_by = "pseudotime",
+           label_cell_groups=FALSE,
+           label_leaves=FALSE,
+           label_branch_points=FALSE,
+           graph_label_size=1.5)
+ggsave("UMAP_by_pseudotime.pdf", dpi = 600, width = 4.5, height = 3)
+```
+
+
+
+
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
