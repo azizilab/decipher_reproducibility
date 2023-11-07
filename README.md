@@ -9,8 +9,6 @@ The Decipher code used in these notebook is available at:
 For using Decipher, we recommend using the latest version at https://github.com/azizilab/decipher.
 It is more documented and has more features.
 
-This repo is available on Zenodo at: https://doi.org/10.5281/zenodo.10079832 
-
 
 ## Figure 1
 - simulated_data.ipynb
