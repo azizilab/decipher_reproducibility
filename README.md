@@ -15,11 +15,11 @@ It is more documented and has more features.
 ## Figure 2
 
 ## Figure 3
--Figure_3_PDAC.ipynb
--pdac_scvi.ipynb
+- Figure_3_PDAC.ipynb
+- pdac_scvi.ipynb
 
 ## Figure 4
--EDF 1.ipynb
+- EDF 1.ipynb
 - analysis-aml1.ipynb
 - comparison-aml1-scvi-decipher.ipynb
 - ext-fig-adjustments.ipynb
@@ -35,8 +35,8 @@ It is more documented and has more features.
 ## Figure 7
 
 ## Supplementary Figure 1
--Figure_3_PDAC.ipynb
--pdac_scvi.ipynb
+- Figure_3_PDAC.ipynb
+- pdac_scvi.ipynb
 
 ## Supplementary Figure 2
 - EDF 1.ipynb
