@@ -13,6 +13,8 @@ It is more documented and has more features.
 - simulated_data.ipynb
 
 ## Figure 2
+- simulation/ 
+  - Run simulation.py, then generate_figures.py
 
 ## Figure 3
 - Figure_3_PDAC.ipynb
