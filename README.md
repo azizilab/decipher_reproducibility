@@ -15,7 +15,74 @@ It is more documented and has more features.
 ## Figure 2
 
 ## Figure 3
--
+-Figure_3_PDAC.ipynb
+-pdac_scvi.ipynb
+
+## Figure 4
+-EDF 1.ipynb
+- analysis-aml1.ipynb
+- comparison-aml1-scvi-decipher.ipynb
+- ext-fig-adjustments.ipynb
+
+## Figure 5
+- analysis-aml1.ipynb
+- temporal_tf.ipynb
+
+## Figure 6
+- temporal_tf.ipynb
+- cohort_comparison.ipynb
+
+## Figure 7
+
+## Supplementary Figure 1
+-Figure_3_PDAC.ipynb
+-pdac_scvi.ipynb
+
+## Supplementary Figure 2
+- EDF 1.ipynb
+- mutation_call.ipynb
+- 00_decipher AML cohort.ipynb
+
+## Supplementary Figure 3
+- ext-fig-adjustments.ipynb
+- <trajectory on other patients?>
+
+## Supplementary Figure 4
+- benchmark/1-run-R-methods.ipynb
+- benchmark/2-run-Python-methods.ipynb
+- benchmark/3-evaluate-metric.ipynb
+
+## Supplementary Figure 5
+ - ext-fig-adjustments.ipynb
+ - <additional notebook?>
+
+## Supplementary Figure 6
+
+## Supplementary Figure 7
+- temporal_tf.ipynb
+
+## Supplementary Figure 8
+- temporal_tf.ipynb
+
+## Supplementary Figure 9
+- temporal_tf.ipynb
+
+## Supplementary Figure 10
+- temporal_tf.ipynb
+
+## Supplementary Figure 11
+- cohort_comparison.ipynb
+- <additional notebook?>
+
+## SI Figure 1
+
+## SI Figure 2
+- RNA_ATAC_figures.ipynb
+- LIGER_from_ARCHR_merged-AML7.ipynb
+- Example_ArchR.ipynb
+
+## SI Figure 3
+- RNA_ATAC_figures.ipynb
 ________________________________________________________________-
 ## Figure 1
 - simulated_data.ipynb
