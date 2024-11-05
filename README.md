@@ -9,7 +9,14 @@ The Decipher code used in these notebook is available at:
 For using Decipher, we recommend using the latest version at https://github.com/azizilab/decipher.
 It is more documented and has more features.
 
+## Figure 1
+- simulated_data.ipynb
 
+## Figure 2
+
+## Figure 3
+-
+________________________________________________________________-
 ## Figure 1
 - simulated_data.ipynb
 - 00_decipher AML cohort.ipynb
